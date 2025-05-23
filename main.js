@@ -163,19 +163,3 @@ function setupFilterEvent(quoteData, philosopherData) {
       }
     });
 }
-
-// toggle button event code
-
-var toggleButton = document.getElementById("toggle-button");
-var moreText = document.getElementById("more-text");
-
-toggleButton.onclick = function () {
-  if (moreText.style.display === "none" || moreText.style.display === "") {
-    // checks whether "moreText"-div is currently hidden: "none" means its hidden, empty string means no display style was set inline
-    moreText.style.display = "block";
-    toggleButton.innerHTML = "Show Less";
-  } else {
-    moreText.style.display = "none";
-    toggleButton.innerHTML = "Show More";
-  }
-};
