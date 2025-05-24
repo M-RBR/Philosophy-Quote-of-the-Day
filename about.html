@@ -39,44 +39,50 @@
     </header>
 
     <main>
-      <p>
-        This website presents a randomly selected philosophical quote of the day
-        using a free public API. You can discover thoughts by great thinkers
-        across time, filtered by philosopher, historical period, or theme.
-      </p>
-      <p>
-        The project was built using only HTML, CSS, and JavaScript, and
-        demonstrates the use of asynchronous API calls, DOM manipulation, and
-        responsive design.
-      </p>
+      <section
+        class="container d-flex flex-wrap align-items-center justify-content-between mt-5"
+      >
+        <div class="about-text col-md-6">
+          <h2 class="mb-4">About</h2>
+          <p>
+            This website presents a randomly selected philosophical quote of the
+            day using
+            <a href="https://philosophersapi.com/"> a free public API </a>. You
+            can moreover discover thoughts by great thinkers across time,
+            filtered by philosopher or keyword.
+          </p>
+          <p>
+            The project was built using only HTML, CSS, and JavaScript, and
+            demonstrates the use of asynchronous API calls, DOM manipulation,
+            and responsive design.
+          </p>
+        </div>
 
-      <section class="container my-5 text-center">
-        <div class="row align-items-start justify-content-center">
-          <div class="col-md-5">
-            <img
-              src="Rodin_sculpture_Le penseur.jpg"
-              alt="picture of Rodin sculpture"
-              class="img-fluid rounded-circle"
-              style="max-width: 250px; height: auto"
-            />
-          </div>
+        <div class="picture col-md-5 text-center">
+          <img
+            class="img-fluid rounded-circle shadow"
+            src="Arabic Socrates.jpg"
+            alt="image of Socrates with students from Arabic manuscript"
+            class="img-fluid rounded-circle"
+            style="max-width: 250px; height: auto"
+          />
+        </div>
 
-          <div class="col-md-5 text-start">
-            <p class="mb-2 mt-1">
-              <i>The Thinker/Le Penseur</i>, Auguste Rodin
+        <div class="col-md-5 text-start">
+          <p class="mb-2 mt-1">
+            <i>Socrates and his students</i>
+          </p>
+          <div id="more-text" style="display: none">
+            <p class="mt-3 text-muted fst-italic">
+              This bronze sculpture, made in 1904 by the French sculptor Auguste
+              Rodin, is a universally recognized symbol for philosophy and other
+              practices of contemplation or introspection. It is exhibited at
+              the Musée Rodin in Paris. Source...
             </p>
-            <div id="more-text" style="display: none">
-              <p>
-                This bronze sculpture, made in 1904 by the French sculptor
-                Auguste Rodin, is a universally recognized symbol for philosophy
-                and other practices of contemplation or introspection. It is
-                exhibited at the Musée Rodin in Paris. Source...
-              </p>
-            </div>
-            <button id="toggle-button" class="btn btn-outline-dark btn-sm">
-              Show More
-            </button>
           </div>
+          <button id="toggle-button" class="btn btn-outline-dark btn-sm">
+            Show More
+          </button>
         </div>
       </section>
     </main>
@@ -92,6 +98,5 @@
       integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D"
       crossorigin="anonymous"
     ></script>
-    <div class="bottom-colored-block"></div>
   </body>
 </html>

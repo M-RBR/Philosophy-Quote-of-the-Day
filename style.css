@@ -32,16 +32,6 @@ body {
   padding-bottom: 80px;
 }
 
-.bottom-colored-block {
-  background-color: rgba(52, 46, 27, 0.854) !important;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 30px; /* Adjust this value. A typical Bootstrap navbar is around 56px tall, so 80px is "a little bit larger". */
-  z-index: -1; /* Ensures it stays behind other content if needed, but above the body's background */
-}
-
 #date-display {
   font-size: 19px;
   margin-bottom: 3rem;
