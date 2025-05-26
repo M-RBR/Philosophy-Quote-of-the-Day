@@ -30,36 +30,64 @@
           <a class="nav-link text-white" href="about.html">About</a>
         </div>
 
-        <a class="nav-link text-white ms-auto" href="contact.html">Contact</a>
+        <a class="nav-link text-white ms-auto" href="contact.html"
+          >Newsletter & Contact</a
+        >
       </div>
     </nav>
 
-    <header>
-      <h3>Contact</h3>
-    </header>
+    <section
+      class="container d-flex flex-column flex-lg-row justify-content-between gap-4 mt-5 mb-5"
+    >
+      <!-- Newsletter -->
+      <div class="form-block flex-fill">
+        <h3 class="mb-3">Newsletter</h3>
+        <p class="mb-4">
+          We are currently working on a newsletter to receive the philosophy
+          quote of the day in your inbox every morning. <br />
+          Sign up here if you're interested and we'll notify you once our
+          webdeveloper has learned backend.
+        </p>
+        <form id="newsletter-form">
+          <input
+            type="text"
+            id="name"
+            class="form-control mb-3"
+            placeholder="Name"
+            name="name"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            class="form-control mb-3"
+            placeholder="Email address"
+            name="mail"
+            required
+          />
+          <button type="submit" class="btn btn-dark w-100">Notify Me</button>
 
-    <form action="/action_page.php">
-      <div class="container">
-        <h3>Subscribe to our Newsletter</h3>
-        <p>
-          Want to receive the Philosophy Quote of the Day in your inbox every
-          morning? Subscribe here to our newsletter!
+          <div
+            id="subscription-message"
+            class="mt-3 text-success"
+            style="display: none"
+          >
+            Thank you! We'll let you know once the newsletter is ready.
+          </div>
+        </form>
+      </div>
+
+      <!-- Contact -->
+      <div class="form-block flex-fill">
+        <h3 class="mb-3">Contact</h3>
+        <p class="mb-1">If you have any questions or comments, write to:</p>
+        <p class="mt-0">
+          <a href="mailto:info@philosophyquotes.com" class="text-dark fw-bold">
+            info@philosophyquotes.com
+          </a>
         </p>
       </div>
-
-      <div class="container" style="background-color: white">
-        <input type="text" placeholder="Name" name="name" required />
-        <input type="text" placeholder="Email address" name="mail" required />
-        <label>
-          <input type="checkbox" checked="checked" name="subscribe" /> Daily
-          Newsletter
-        </label>
-      </div>
-
-      <div class="container">
-        <input type="submit" value="Subscribe" />
-      </div>
-    </form>
+    </section>
 
     <script src="main.js"></script>
   </body>
