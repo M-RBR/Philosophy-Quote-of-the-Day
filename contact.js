@@ -1,32 +1,25 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("newsletter-form");
-  const message = document.getElementById("subscription-message");
-
-  form.addEventListener("submit", function (e) {
+document
+  .getElementById("newsletter-form")
+  .addEventListener("submit", function (e) {
     e.preventDefault();
+    // added to prevent form from actually submitting
 
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
 
-    if (name && email.includes("@")) {
-      // Create a unique entry
-      const subscriber = { name, email, timestamp: new Date().toISOString() };
+    if (name && email) {
+      const subscribers = JSON.parse(
+        localStorage.getItem("subscribers") || "[]"
+      );
+      subscribers.push({ name, email });
+      localStorage.setItem("subscribers", JSON.stringify(subscribers));
 
-      // Get existing subscriptions or start new array
-      const stored =
-        JSON.parse(localStorage.getItem("newsletterSubscribers")) || [];
+      console.log("Saved:", JSON.parse(localStorage.getItem("subscribers")));
 
-      // Avoid duplicates (basic check)
-      if (!stored.find((entry) => entry.email === email)) {
-        stored.push(subscriber);
-        localStorage.setItem("newsletterSubscribers", JSON.stringify(stored));
-      }
+      // showing confirmation message
+      document.getElementById("subscription-message").style.display = "block";
 
-      // Confirmation
-      message.style.display = "block";
-      form.reset();
-    } else {
-      alert("Please enter a valid name and email address.");
+      //  clears form
+      this.reset();
     }
   });
-});

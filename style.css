@@ -66,7 +66,7 @@ header h1 {
 
 .navbar .nav-link:hover,
 .navbar .nav-link:focus {
-  color: #a58d00 !important;
+  color: #bca211 !important;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 5px;
 }
@@ -204,7 +204,7 @@ header h1 {
 }
 
 #newsletter-form input:focus {
-  border-color: #a58d00;
+  border-color: #ffd700;
   outline: none;
   box-shadow: 0 0 0 0.15rem rgba(222, 209, 68, 0.25);
 }
@@ -228,11 +228,12 @@ header h1 {
   text-align: center;
   font-size: 1rem;
   font-style: italic;
-  color: #2d6a4f;
+  color: #c9b128ef !important;
 }
 
 .form-block {
   background-color: #ffffffea;
+
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -245,4 +246,11 @@ header h1 {
   .form-block {
     width: 48%;
   }
+}
+
+input[type="text"]:focus,
+select:focus {
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 0 0.1rem rgba(255, 215, 0, 0.5) !important;
+  outline: none !important;
 }

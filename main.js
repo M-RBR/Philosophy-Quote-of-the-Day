@@ -35,7 +35,7 @@ document.getElementById(
   "date-display"
 ).textContent = `~ ${days[current_day]} / ${months[current_month]} ${current_date}, ${current_year} ~`;
 
-// quote
+// quote fetching
 
 function fetchQuotesAndPhilosophers() {
   const fetches = [
@@ -49,8 +49,8 @@ function fetchQuotesAndPhilosophers() {
     });
     console.log(jsons);
     Promise.all(jsons).then(function (datas) {
-      getPhilosophers(datas[1]);
-      refreshEvent(datas[0], datas[1]);
+      getPhilosophers(datas[1]); // to populate dropdown selection
+      refreshEvent(datas[0], datas[1]); // both endpoints needed
       displayRandomQuote(datas[0], datas[1]);
       setupFilterEvent(datas[0], datas[1]);
     });
@@ -60,8 +60,8 @@ function fetchQuotesAndPhilosophers() {
 fetchQuotesAndPhilosophers();
 
 function displayRandomQuote(quoteData, philosopherData) {
-  const randomIndex = Math.floor(Math.random() * quoteData.length); // generate random index based on number of available quotes
-  const quoteObj = quoteData[randomIndex]; // get quote object from quoteData using random index;
+  const randomIndex = Math.floor(Math.random() * quoteData.length);
+  const quoteObj = quoteData[randomIndex];
 
   const quoteElement = document.getElementById("quote-text"); // DOM to get elements where quote and philosopher will be displayed
   quoteElement.innerHTML = quoteObj.quote; // set quote text into appropriate elemen;
@@ -82,10 +82,9 @@ function displayRandomQuote(quoteData, philosopherData) {
   authorElement.innerHTML = `— ${philosopherName} ${philosopherLife}, "${philosopherWork}" —`; // template using back ticks, embeds variable
 }
 
-// displayRandomQuote(); // displays random quote when page loads
-
 function refreshEvent(quoteData, philosopherData) {
-  document // when "Get New Quote" button i("refresh button") is clicked, a new random quote is played
+  // event listener for apply filters/search button
+  document
     .getElementById("refresh-quote")
     .addEventListener("click", () =>
       displayRandomQuote(quoteData, philosopherData)
@@ -96,28 +95,27 @@ function refreshEvent(quoteData, philosopherData) {
 
 function getPhilosophers(philosopherData) {
   const philosopherSelect = document.getElementById("philosopher-filter");
-
   philosopherData.forEach(function (philosopher) {
-    // fill dropdown menu with philosopher options from philosopherData
-    const option = document.createElement("option"); // create new "option" element
-    option.value = philosopher.id; // set value attribute to philosopher's ID
-    option.textContent = philosopher.name; // set text displayed in dropdown
-    philosopherSelect.appendChild(option); // add option to select element
+    const option = document.createElement("option");
+    option.value = philosopher.id;
+    option.textContent = philosopher.name;
+    philosopherSelect.appendChild(option);
   });
 }
 
 function setupFilterEvent(quoteData, philosopherData) {
+  // event listener
   document
     .getElementById("apply-filters")
     .addEventListener("click", function () {
-      const selectedPhilosopherID = // get selected philosopher ID from dropdown
+      const selectedPhilosopherID =
         document.getElementById("philosopher-filter").value;
-      const keyword = document // get keyword enter by user and normalize it
+      const keyword = document
         .getElementById("keyword-filter")
         .value.trim()
         .toLowerCase();
 
-      // Filter quote that match both selected philosopher and keyword
+      // Filter quotes that match both selected philosopher and keyword
 
       const filteredQuotes = quoteData.filter(function (quote) {
         const matchesPhilosopher = // check if quote matches selected philosopher
@@ -130,7 +128,7 @@ function setupFilterEvent(quoteData, philosopherData) {
         return matchesPhilosopher && matchesKeyword; // only returns quote that match both filters
       });
 
-      // Get references to the DOM elements for output
+      // DOM Manipulation
       const quoteElement = document.getElementById("quote-text");
       const authorElement = document.getElementById("quote-author");
 
