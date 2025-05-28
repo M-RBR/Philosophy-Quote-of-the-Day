@@ -43,15 +43,15 @@ function fetchQuotesAndPhilosophers() {
     fetch("https://philosophersapi.com/api/philosophers"),
   ];
   Promise.all(fetches).then(function (responses) {
-    console.log(responses);
+    console.log(responses); // debugging line
     const jsons = responses.map(function (res) {
       return res.json();
     });
-    console.log(jsons);
+    console.log(jsons); // debugging line
     Promise.all(jsons).then(function (datas) {
-      getPhilosophers(datas[1]); // to populate dropdown selection
+      getPhilosophers(datas[1]); // to fill select dropdown
       refreshEvent(datas[0], datas[1]); // both endpoints needed
-      displayRandomQuote(datas[0], datas[1]);
+      displayRandomQuote(datas[0], datas[1]); // when page loads
       setupFilterEvent(datas[0], datas[1]);
     });
   });
@@ -63,27 +63,27 @@ function displayRandomQuote(quoteData, philosopherData) {
   const randomIndex = Math.floor(Math.random() * quoteData.length);
   const quoteObj = quoteData[randomIndex];
 
-  const quoteElement = document.getElementById("quote-text"); // DOM to get elements where quote and philosopher will be displayed
-  quoteElement.innerHTML = quoteObj.quote; // set quote text into appropriate elemen;
+  const quoteElement = document.getElementById("quote-text");
+  quoteElement.innerHTML = quoteObj.quote;
 
   const authorElement = document.getElementById("quote-author");
 
-  console.log(quoteObj);
+  console.log(quoteObj); // for debugging
+
   const philosopherID = quoteObj.philosopher.id; // get philosopher's ID from quote object
   const philosopherObj = philosopherData.find(function (p) {
-    // find full philosopher object in philosopherData array using ID
+    // returns FULL philo object
     return p.id === philosopherID;
   });
 
-  const philosopherName = philosopherObj.name; // store philosopher's name and life dates
+  const philosopherName = philosopherObj.name;
   const philosopherLife = philosopherObj.life;
-  const philosopherWork = quoteObj.work ? quoteObj.work : "Unknown Work"; // check if work is associated with quote, if not use fallback
+  const philosopherWork = quoteObj.work ? quoteObj.work : "Unknown Work"; // fallback
 
-  authorElement.innerHTML = `— ${philosopherName} ${philosopherLife}, "${philosopherWork}" —`; // template using back ticks, embeds variable
+  authorElement.innerHTML = `— ${philosopherName} ${philosopherLife}, "${philosopherWork}" —`;
 }
 
 function refreshEvent(quoteData, philosopherData) {
-  // event listener for apply filters/search button
   document
     .getElementById("refresh-quote")
     .addEventListener("click", () =>
@@ -104,7 +104,6 @@ function getPhilosophers(philosopherData) {
 }
 
 function setupFilterEvent(quoteData, philosopherData) {
-  // event listener
   document
     .getElementById("apply-filters")
     .addEventListener("click", function () {
@@ -118,17 +117,16 @@ function setupFilterEvent(quoteData, philosopherData) {
       // Filter quotes that match both selected philosopher and keyword
 
       const filteredQuotes = quoteData.filter(function (quote) {
-        const matchesPhilosopher = // check if quote matches selected philosopher
+        const matchesPhilosopher =
           selectedPhilosopherID === "" ||
           quote.philosopher.id === selectedPhilosopherID;
 
-        const matchesKeyword = // check if quote contains entered keyword
+        const matchesKeyword =
           keyword === "" || quote.quote.toLowerCase().includes(keyword);
 
         return matchesPhilosopher && matchesKeyword; // only returns quote that match both filters
       });
 
-      // DOM Manipulation
       const quoteElement = document.getElementById("quote-text");
       const authorElement = document.getElementById("quote-author");
 
