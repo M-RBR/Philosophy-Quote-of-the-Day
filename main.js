@@ -49,9 +49,9 @@ function fetchQuotesAndPhilosophers() {
     });
     console.log(jsons); // debugging line
     Promise.all(jsons).then(function (datas) {
-      getPhilosophers(datas[1]); // to fill select dropdown
-      refreshEvent(datas[0], datas[1]); // both endpoints needed
-      displayRandomQuote(datas[0], datas[1]); // when page loads
+      getPhilosophers(datas[1]);
+      refreshEvent(datas[0], datas[1]);
+      displayRandomQuote(datas[0], datas[1]);
       setupFilterEvent(datas[0], datas[1]);
     });
   });
@@ -70,7 +70,7 @@ function displayRandomQuote(quoteData, philosopherData) {
 
   console.log(quoteObj); // for debugging
 
-  const philosopherID = quoteObj.philosopher.id; // get philosopher's ID from quote object
+  const philosopherID = quoteObj.philosopher.id;
   const philosopherObj = philosopherData.find(function (p) {
     // returns FULL philo object
     return p.id === philosopherID;
@@ -131,7 +131,7 @@ function setupFilterEvent(quoteData, philosopherData) {
       const authorElement = document.getElementById("quote-author");
 
       if (filteredQuotes.length > 0) {
-        // if filtered quotes exist, display random quote
+        // check if any filtered quote exists, if yes continue
         const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
         const quoteObj = filteredQuotes[randomIndex];
 
@@ -140,7 +140,6 @@ function setupFilterEvent(quoteData, philosopherData) {
           return p.id === philosopherID;
         });
 
-        // extract and assign relevant philosopher data
         const philosopherName = philosopherObj.name;
         const philosopherLife = philosopherObj.life;
         let philosopherWork; // fall back if work is missing
@@ -150,7 +149,6 @@ function setupFilterEvent(quoteData, philosopherData) {
           philosopherWork = "Unknown Work";
         }
 
-        // display selected quote and author info‚
         quoteElement.textContent = quoteObj.quote;
         authorElement.textContent = `— ${philosopherName} ${philosopherLife}, "${philosopherWork}" —`;
       } else {
