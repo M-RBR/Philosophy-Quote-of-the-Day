@@ -21,14 +21,9 @@
 
   <body>
     <nav class="navbar">
-      <div
-        class="container-fluid d-flex flex-column flex-sm-row justify-content-between align-items-center px-3 py-2 text-center gap-2"
-      >
-        <a class="nav-link text-white" href="index.html">Home</a>
+      <div class="container-fluid d-flex justify-content-between align-items-center px-4 py-2">
+        <a class="nav-link text-white active" href="index.html">Home</a>
         <a class="nav-link text-white" href="about.html">About</a>
-        <a class="nav-link text-white" href="contact.html"
-          >Newsletter & Contact</a
-        >
       </div>
     </nav>
 
@@ -65,26 +60,26 @@
 
       <section id="filters" class="container mb-5">
         <form class="row g-3 align-items-center justify-content-center">
-          <div class="col-auto">
+          <div class="col-12 col-md-auto text-center text-md-start">
             <span>🌟</span>
             <label for="philosopher-filter" class="col-form-label fw-bold fs-5">
-              Or search quote by philosopher:
+              Search quote by philosopher
             </label>
           </div>
-
-          <div class="col-auto">
+        
+          <div class="col-12 col-md-auto">
             <select id="philosopher-filter" class="form-select">
               <option value="">Select a name</option>
             </select>
           </div>
-
-          <div class="col-auto">
+        
+          <div class="col-12 col-md-auto text-center text-md-start">
             <label for="keyword-filter" class="col-form-label fw-bold fs-5">
-              and/or keyword:
+              and/or keyword
             </label>
           </div>
-
-          <div class="col-auto">
+        
+          <div class="col-12 col-md-auto">
             <input
               type="text"
               id="keyword-filter"
@@ -92,23 +87,20 @@
               placeholder="e.g. happiness, justice"
             />
           </div>
-
-          <div class="col-auto">
+        
+          <div class="col-12 col-md-auto text-center">
             <button type="button" id="apply-filters" class="btn btn-light">
               Search
+            </button>
+            <button type="button" id="reset-filters" class="btn btn-light ms-2">
+              Reset filters
             </button>
             <span>🌟</span>
           </div>
         </form>
       </section>
-
-      <!-- remove? -->
-      <section id="filtered-results"></section>
-      <!-- remove? -->
     </main>
 
-    <!-- <script src="quote-data.js"></script> -->
-    <!-- <script src="philosopher-data.js"></script> -->
     <script src="main.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

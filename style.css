@@ -26,7 +26,7 @@ body {
   font-family: "Lora", Georgia, serif;
   background-color: #f1f1f1; /* fallback */
   background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
-  padding: 2rem 0;
+  padding: 1rem 0;
   line-height: 1.6;
   font-size: 1.1rem;
   padding-bottom: 80px;
@@ -58,7 +58,6 @@ header h1 {
 }
 
 .navbar .nav-link {
-  font-family: "Lora", serif;
   font-size: 1.1rem;
   padding: 0.5rem 1rem;
   transition: color 0.3s ease, background-color 0.3s ease;
@@ -66,13 +65,13 @@ header h1 {
 
 .navbar .nav-link:hover,
 .navbar .nav-link:focus {
-  color: #bca211 !important;
+  color: #e9cf3c !important;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 5px;
 }
 
 .navbar .nav-link.active {
-  color: #ffd700 !important;
+  color: #ecca1de1 !important;
   font-weight: bold;
 }
 
@@ -145,7 +144,7 @@ header h1 {
 }
 
 .about-text p {
-  font-size: 1.1rem;
+  font-size: 1.0rem;
   color: #444;
 }
 
@@ -180,77 +179,7 @@ header h1 {
   color: #555;
 }
 
-/* Newsletter & Contact  */
-
-#newsletter-form {
-  max-width: 800px;
-  width: 70%;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background-color: #ffffffea;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-#newsletter-form input[type="text"],
-#newsletter-form input[type="email"] {
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-family: "Lora", serif;
-  background-color: #fefefe;
-  transition: border-color 0.3s ease;
-}
-
-#newsletter-form input:focus {
-  border-color: #ffd700;
-  outline: none;
-  box-shadow: 0 0 0 0.15rem rgba(222, 209, 68, 0.25);
-}
-
-#newsletter-form button {
-  padding: 0.75rem 1.25rem;
-  font-size: 1rem;
-  border-radius: 8px;
+.error-message {
+  color: #dc3545 !important;
   font-weight: 500;
-  font-family: "Lora", serif;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-#newsletter-form button:hover {
-  background-color: #333333;
-  color: #ffd700;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-#subscription-message {
-  text-align: center;
-  font-size: 1rem;
-  font-style: italic;
-  color: #c9b128ef !important;
-}
-
-.form-block {
-  background-color: #ffffffea;
-
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-@media (min-width: 992px) {
-  .form-block {
-    width: 48%;
-  }
-}
-
-input[type="text"]:focus,
-select:focus {
-  border-color: #ffd700 !important;
-  box-shadow: 0 0 0 0.1rem rgba(255, 215, 0, 0.5) !important;
-  outline: none !important;
 }

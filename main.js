@@ -31,6 +31,7 @@ current_day = date_data.getDay();
 current_month = date_data.getMonth();
 current_date = date_data.getDate();
 current_year = date_data.getFullYear();
+
 document.getElementById(
   "date-display"
 ).textContent = `~ ${days[current_day]} / ${months[current_month]} ${current_date}, ${current_year} ~`;
@@ -53,6 +54,7 @@ function fetchQuotesAndPhilosophers() {
       refreshEvent(datas[0], datas[1]);
       displayRandomQuote(datas[0], datas[1]);
       setupFilterEvent(datas[0], datas[1]);
+      setupResetEvent();
     });
   });
 }
@@ -68,8 +70,6 @@ function displayRandomQuote(quoteData, philosopherData) {
 
   const authorElement = document.getElementById("quote-author");
 
-  console.log(quoteObj); // for debugging
-
   const philosopherID = quoteObj.philosopher.id;
   const philosopherObj = philosopherData.find(function (p) {
     // returns FULL philo object
@@ -78,7 +78,7 @@ function displayRandomQuote(quoteData, philosopherData) {
 
   const philosopherName = philosopherObj.name;
   const philosopherLife = philosopherObj.life;
-  const philosopherWork = quoteObj.work ? quoteObj.work : "Unknown Work"; // fallback
+  const philosopherWork = quoteObj.work ? quoteObj.work : "Unknown Work"; 
 
   authorElement.innerHTML = `— ${philosopherName} ${philosopherLife}, "${philosopherWork}" —`;
 }
@@ -91,7 +91,7 @@ function refreshEvent(quoteData, philosopherData) {
     );
 }
 
-// part 2: filters section
+// filters section
 
 function getPhilosophers(philosopherData) {
   const philosopherSelect = document.getElementById("philosopher-filter");
@@ -107,53 +107,73 @@ function setupFilterEvent(quoteData, philosopherData) {
   document
     .getElementById("apply-filters")
     .addEventListener("click", function () {
-      const selectedPhilosopherID =
-        document.getElementById("philosopher-filter").value;
-      const keyword = document
-        .getElementById("keyword-filter")
-        .value.trim()
-        .toLowerCase();
+      const selectedPhilosopherID = document.getElementById("philosopher-filter").value;
+      const keyword = document.getElementById("keyword-filter").value.trim().toLowerCase();
 
-      // Filter quotes that match both selected philosopher and keyword
+      // check if at least one filter is provided
+      if (selectedPhilosopherID === "" && keyword === "") {
+        const quoteElement = document.getElementById("quote-text");
+        const authorElement = document.getElementById("quote-author");
+        quoteElement.className = "error-message";
+        quoteElement.textContent = "Please select a philosopher or enter a keyword to search.";
+        authorElement.textContent = "";
+        return;
+      }
 
+      // filter quotes that match the provided criteria
       const filteredQuotes = quoteData.filter(function (quote) {
-        const matchesPhilosopher =
-          selectedPhilosopherID === "" ||
-          quote.philosopher.id === selectedPhilosopherID;
-
-        const matchesKeyword =
-          keyword === "" || quote.quote.toLowerCase().includes(keyword);
-
-        return matchesPhilosopher && matchesKeyword; // only returns quote that match both filters
+        const matchesPhilosopher = selectedPhilosopherID === "" || quote.philosopher.id === selectedPhilosopherID;
+        const matchesKeyword = keyword === "" || quote.quote.toLowerCase().includes(keyword);
+        return matchesPhilosopher && matchesKeyword;
       });
 
       const quoteElement = document.getElementById("quote-text");
       const authorElement = document.getElementById("quote-author");
 
       if (filteredQuotes.length > 0) {
-        // check if any filtered quote exists, if yes continue
         const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
         const quoteObj = filteredQuotes[randomIndex];
 
-        const philosopherID = quoteObj.philosopher.id; // find full philosopher info based on ID
+        const philosopherID = quoteObj.philosopher.id;
         const philosopherObj = philosopherData.find(function (p) {
           return p.id === philosopherID;
         });
 
         const philosopherName = philosopherObj.name;
         const philosopherLife = philosopherObj.life;
-        let philosopherWork; // fall back if work is missing
-        if (quoteObj.work) {
-          philosopherWork = quoteObj.work;
-        } else {
-          philosopherWork = "Unknown Work";
-        }
+        const philosopherWork = quoteObj.work ? quoteObj.work : "Unknown Work";
 
+        quoteElement.className = "";
         quoteElement.textContent = quoteObj.quote;
         authorElement.textContent = `— ${philosopherName} ${philosopherLife}, "${philosopherWork}" —`;
       } else {
-        quoteElement.textContent = "No quote found.";
+        quoteElement.className = "error-message";
+        quoteElement.textContent = "No quotes found matching your criteria.";
         authorElement.textContent = "";
       }
+    });
+}
+
+// Reset filters functionality
+function setupResetEvent() {
+  document
+    .getElementById("reset-filters")
+    .addEventListener("click", function () {
+      // Reset the philosopher dropdown to default
+      document.getElementById("philosopher-filter").value = "";
+      
+      // Clear the keyword input
+      document.getElementById("keyword-filter").value = "";
+      
+      // Clear any error messages and reset quote display
+      const quoteElement = document.getElementById("quote-text");
+      const authorElement = document.getElementById("quote-author");
+      
+      // Remove error styling if present
+      quoteElement.className = "";
+      
+      // Show a message that filters have been reset
+      quoteElement.textContent = "Filters have been reset. Use the 'Refresh Quote' button to get a new random quote.";
+      authorElement.textContent = "";
     });
 }
