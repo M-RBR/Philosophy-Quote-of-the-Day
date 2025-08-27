@@ -186,7 +186,7 @@ function setupResetEvent() {
 
       quoteElement.className = "success-message";
       quoteElement.textContent =
-        "Filters have been reset. Use the 'Refresh Quote' button to get a new random quote.";
+        "Filters have been reset! Use the 'Refresh Quote' button to get a new random quote.";
       authorElement.textContent = "";
     });
 }

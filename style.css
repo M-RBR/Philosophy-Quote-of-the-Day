@@ -64,6 +64,9 @@ section {
 .navbar .nav-link.active {
   color: #ecca1de1 !important;
   font-weight: bold;
+  border: 1px solid rgba(255, 255, 255, 0.8); 
+  border-radius: 4px; 
+  padding: 0.5rem 1rem; 
 }
 
 /* Main page */
@@ -151,13 +154,16 @@ header h1 {
 
 .about-text h2 {
   font-size: 2rem;
-  text-align: left;
+  text-align: center;
   color: #3e3e3e;
+  line-height: 3;
 }
 
 .about-text p {
-  font-size: 1.0rem;
+  font-size: 1.1rem;
+  text-align: center;
   color: #444;
+  line-height: 2;
 }
 
 .picture {
