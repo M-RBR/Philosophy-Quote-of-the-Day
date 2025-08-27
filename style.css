@@ -1,3 +1,5 @@
+/* Global styling*/
+
 body,
 h1,
 h2,
@@ -26,28 +28,17 @@ body {
   font-family: "Lora", Georgia, serif;
   background-color: #f1f1f1; /* fallback */
   background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
-  padding: 1rem 0;
   line-height: 1.6;
   font-size: 1.1rem;
-  padding-bottom: 80px;
-}
-
-#date-display {
-  font-size: 19px;
-  margin-bottom: 3rem;
-  margin-top: 2rem;
-  text-decoration: underline;
+  padding-top: 1rem;
+  padding-bottom: -1rem;
 }
 
 section {
   margin-bottom: 3rem;
 }
 
-header h1 {
-  text-align: center;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
-}
+/* Navbar */
 
 .navbar {
   background-color: rgba(50, 48, 42, 0.854) !important;
@@ -73,6 +64,21 @@ header h1 {
 .navbar .nav-link.active {
   color: #ecca1de1 !important;
   font-weight: bold;
+}
+
+/* Main page */
+
+#date-display {
+  font-size: 19px;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+  text-decoration: underline;
+}
+
+header h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
 #api-data {
@@ -125,11 +131,17 @@ header h1 {
 
 .btn-light:active {
   border: 2px solid #ffd700;
-  box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.5);
-  outline: none; /* added to make sure that no default outline overrides custom styling */
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+  outline: none;
 }
 
 #apply-filters {
+  border: 1px solid rgb(80, 79, 72);
+  border-radius: 50px;
+  font-size: 18px;
+}
+
+#reset-filters {
   border: 1px solid rgb(80, 79, 72);
   border-radius: 50px;
   font-size: 18px;
@@ -149,12 +161,12 @@ header h1 {
 }
 
 .picture {
-  max-width: 380px;
+  max-width: 280px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 0 !important; /* Needed to prevent Bootstrap's mt-5 pushing it down */
+  margin-top: 0 !important; /* to prevent Bootstrap's mt-5 pushing it down */
 }
 
 .about-text,
@@ -181,5 +193,10 @@ header h1 {
 
 .error-message {
   color: #dc3545 !important;
+  font-weight: 500;
+}
+
+.success-message {
+  color: #198754 !important; 
   font-weight: 500;
 }

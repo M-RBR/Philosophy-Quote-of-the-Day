@@ -1,5 +1,3 @@
-// toggle button event code
-
 const toggleButton = document.getElementById("toggle-button");
 const moreText = document.getElementById("more-text");
 

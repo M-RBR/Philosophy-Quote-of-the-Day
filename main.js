@@ -44,11 +44,9 @@ function fetchQuotesAndPhilosophers() {
     fetch("https://philosophersapi.com/api/philosophers"),
   ];
   Promise.all(fetches).then(function (responses) {
-    console.log(responses); // debugging line
     const jsons = responses.map(function (res) {
       return res.json();
     });
-    console.log(jsons); // debugging line
     Promise.all(jsons).then(function (datas) {
       getPhilosophers(datas[1]);
       refreshEvent(datas[0], datas[1]);
@@ -58,7 +56,6 @@ function fetchQuotesAndPhilosophers() {
     });
   });
 }
-
 fetchQuotesAndPhilosophers();
 
 function displayRandomQuote(quoteData, philosopherData) {
@@ -66,19 +63,19 @@ function displayRandomQuote(quoteData, philosopherData) {
   const quoteObj = quoteData[randomIndex];
 
   const quoteElement = document.getElementById("quote-text");
+  quoteElement.className = "";
   quoteElement.innerHTML = quoteObj.quote;
 
   const authorElement = document.getElementById("quote-author");
 
   const philosopherID = quoteObj.philosopher.id;
   const philosopherObj = philosopherData.find(function (p) {
-    // returns FULL philo object
     return p.id === philosopherID;
   });
 
   const philosopherName = philosopherObj.name;
   const philosopherLife = philosopherObj.life;
-  const philosopherWork = quoteObj.work ? quoteObj.work : "Unknown Work"; 
+  const philosopherWork = quoteObj.work ? quoteObj.work : "Unknown Work";
 
   authorElement.innerHTML = `— ${philosopherName} ${philosopherLife}, "${philosopherWork}" —`;
 }
@@ -107,23 +104,30 @@ function setupFilterEvent(quoteData, philosopherData) {
   document
     .getElementById("apply-filters")
     .addEventListener("click", function () {
-      const selectedPhilosopherID = document.getElementById("philosopher-filter").value;
-      const keyword = document.getElementById("keyword-filter").value.trim().toLowerCase();
+      const selectedPhilosopherID =
+        document.getElementById("philosopher-filter").value;
+      const keyword = document
+        .getElementById("keyword-filter")
+        .value.trim()
+        .toLowerCase();
 
-      // check if at least one filter is provided
       if (selectedPhilosopherID === "" && keyword === "") {
         const quoteElement = document.getElementById("quote-text");
         const authorElement = document.getElementById("quote-author");
         quoteElement.className = "error-message";
-        quoteElement.textContent = "Please select a philosopher or enter a keyword to search.";
+        quoteElement.textContent =
+          "Please select a philosopher or enter a keyword to search.";
         authorElement.textContent = "";
         return;
       }
 
       // filter quotes that match the provided criteria
       const filteredQuotes = quoteData.filter(function (quote) {
-        const matchesPhilosopher = selectedPhilosopherID === "" || quote.philosopher.id === selectedPhilosopherID;
-        const matchesKeyword = keyword === "" || quote.quote.toLowerCase().includes(keyword);
+        const matchesPhilosopher =
+          selectedPhilosopherID === "" ||
+          quote.philosopher.id === selectedPhilosopherID;
+        const matchesKeyword =
+          keyword === "" || quote.quote.toLowerCase().includes(keyword);
         return matchesPhilosopher && matchesKeyword;
       });
 
@@ -144,7 +148,8 @@ function setupFilterEvent(quoteData, philosopherData) {
         const philosopherWork = quoteObj.work ? quoteObj.work : "Unknown Work";
 
         quoteElement.className = "";
-        quoteElement.textContent = quoteObj.quote;
+        const highlightedQuote = highlightKeyword(quoteObj.quote, keyword);
+        quoteElement.innerHTML = highlightedQuote;
         authorElement.textContent = `— ${philosopherName} ${philosopherLife}, "${philosopherWork}" —`;
       } else {
         quoteElement.className = "error-message";
@@ -154,26 +159,34 @@ function setupFilterEvent(quoteData, philosopherData) {
     });
 }
 
-// Reset filters functionality
+function highlightKeyword(text, keyword) {
+  if (!keyword || keyword.trim() === "") {
+    return text;
+  }
+  const regex = new RegExp(`(${keyword})`, "gi");
+  return text.replace(
+    regex,
+    '<span style="font-weight: bold; -webkit-text-stroke: 1px #ffd700; text-stroke: 1px #ffd700; color: #000000;">$1</span>'
+  );
+}
+
+// reset filters functionality
 function setupResetEvent() {
   document
     .getElementById("reset-filters")
     .addEventListener("click", function () {
-      // Reset the philosopher dropdown to default
       document.getElementById("philosopher-filter").value = "";
-      
-      // Clear the keyword input
+
       document.getElementById("keyword-filter").value = "";
-      
-      // Clear any error messages and reset quote display
+
       const quoteElement = document.getElementById("quote-text");
       const authorElement = document.getElementById("quote-author");
-      
-      // Remove error styling if present
+
       quoteElement.className = "";
-      
-      // Show a message that filters have been reset
-      quoteElement.textContent = "Filters have been reset. Use the 'Refresh Quote' button to get a new random quote.";
+
+      quoteElement.className = "success-message";
+      quoteElement.textContent =
+        "Filters have been reset. Use the 'Refresh Quote' button to get a new random quote.";
       authorElement.textContent = "";
     });
 }
